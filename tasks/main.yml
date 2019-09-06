@@ -47,6 +47,22 @@
     update_cache: true
     cache_valid_time: 3600
 
+- name: Check if host is enrolled
+  tags:
+    - enroll
+    - freeipaclient
+  register: freeipaclient_ipaconf
+  check_mode: no
+  stat:
+    path: /etc/ipa/default.conf
+
+- name: debug
+  tags:
+    - enroll
+    - freeipaclient
+  debug:
+    msg: "{{ freeipaclient_ipaconf.stat.exists }}"
+
 - name: Install required packages
   tags:
     - packagemanagement
