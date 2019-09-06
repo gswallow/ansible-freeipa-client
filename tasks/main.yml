@@ -63,15 +63,15 @@
   debug:
     msg: "{{ freeipaclient_ipaconf.stat.exists }}"
 
-- name: Install required packages
-  tags:
-    - packagemanagement
-    - freeipaclient
-  become: true
-  with_items: "{{ freeipaclient_packages }}"
-  package:
-    state: present
-    name: "{{ item }}"
+#- name: Install required packages
+#  tags:
+#    - packagemanagement
+#    - freeipaclient
+#  become: true
+#  with_items: "{{ freeipaclient_packages }}"
+#  package:
+#    state: present
+#    name: "{{ item }}"
 
 - name: Check if host is enrolled
   tags:
