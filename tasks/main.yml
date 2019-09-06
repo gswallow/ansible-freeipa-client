@@ -73,30 +73,30 @@
   debug:
     msg: "{{ freeipaclient_ipaconf.stat.exists }}"
 
-- name: Enroll host in domain
-  tags:
-    - enroll
-    - freeipaclient
-  become: true
-  when: not freeipaclient_ipaconf.stat.exists
-  command: >
-    {{ freeipaclient_install_command }}
-    {{'--hostname=' + freeipaclient_hostname  if freeipaclient_hostname is defined else '--hostname=' + ansible_nodename }}
-    --server={{ freeipaclient_server }}
-    --domain={{ freeipaclient_domain }}
-    --principal={{ freeipaclient_enroll_user }}
-    --password={{ freeipaclient_enroll_pass }}
-    --ssh-trust-dns
-    --mkhomedir
-    {{ '--enable-dns-updates' if freeipaclient_enable_dns_updates else ''}}
-    --unattended
-    {{ '--all-ip-addresses' if freeipaclient_all_ip_addresses else ''}}
-    {{ '--no-ntp' if not freeipaclient_enable_ntp else ''}}
-    {{ '--force-join' if freeipaclient_force_join else ''}}
-
-- name: Include Ubuntu specific tasks
-  tags:
-    - ubuntu
-    - freeipaclient
-  when: ansible_os_family == 'Debian'
-  include_tasks: ubuntu.yml
+#- name: Enroll host in domain
+#  tags:
+#    - enroll
+#    - freeipaclient
+#  become: true
+#  when: not freeipaclient_ipaconf.stat.exists
+#  command: >
+#    {{ freeipaclient_install_command }}
+#    {{'--hostname=' + freeipaclient_hostname  if freeipaclient_hostname is defined else '--hostname=' + ansible_nodename }}
+#    --server={{ freeipaclient_server }}
+#    --domain={{ freeipaclient_domain }}
+#    --principal={{ freeipaclient_enroll_user }}
+#    --password={{ freeipaclient_enroll_pass }}
+#    --ssh-trust-dns
+#    --mkhomedir
+#    {{ '--enable-dns-updates' if freeipaclient_enable_dns_updates else ''}}
+#    --unattended
+#    {{ '--all-ip-addresses' if freeipaclient_all_ip_addresses else ''}}
+#    {{ '--no-ntp' if not freeipaclient_enable_ntp else ''}}
+#    {{ '--force-join' if freeipaclient_force_join else ''}}
+#
+#- name: Include Ubuntu specific tasks
+#  tags:
+#    - ubuntu
+#    - freeipaclient
+#  when: ansible_os_family == 'Debian'
+#  include_tasks: ubuntu.yml
