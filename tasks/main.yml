@@ -66,6 +66,13 @@
   stat:
     path: /etc/ipa/default.conf
 
+- name: debug
+  tags:
+    - enroll
+    - freeipaclient
+  debug:
+    msg: "{{ freeipaclient_ipaconf.stat.exists }}"
+
 - name: Enroll host in domain
   tags:
     - enroll
